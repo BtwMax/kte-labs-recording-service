@@ -1,0 +1,935 @@
+{
+	"info": {
+		"_postman_id": "46b47f49-b171-44f0-b2fa-91c7d105d53e",
+		"name": "Kte test",
+		"description": "Коллекция нескольких тестов, для проверки основных функций приложения",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17119821"
+	},
+	"item": [
+		{
+			"name": "Добавление доктора с id=1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"const target = pm.response.json();\r",
+							"pm.test(\"Ответ должен содержать поля: id, uuid, fullName, speciality\", function () {\r",
+							"pm.expect(target).to.have.property('id');\r",
+							"pm.expect(target).to.have.property('uuid');\r",
+							"pm.expect(target).to.have.property('fullName');\r",
+							"pm.expect(target).to.have.property('speciality');\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'fullName'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('fullName');\r",
+							"    pm.expect(jsonData.fullName, '\"fullName\" должен быть равен \"Иванов Иван Иванович\"').to.eql('Иванов Иван Иванович')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'speciality'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('speciality');\r",
+							"    pm.expect(jsonData.speciality, '\"speciality\" должен быть равен \"Терапевт\"').to.eql('Терапевт')\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fullName\": \"Иванов Иван Иванович\",\r\n    \"speciality\": \"Терапевт\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/doctor/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"doctor",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получение доктора по id=1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"const target = pm.response.json();\r",
+							"pm.test(\"Ответ должен содержать поля: id, uuid, fullName, speciality\", function () {\r",
+							"pm.expect(target).to.have.property('id');\r",
+							"pm.expect(target).to.have.property('uuid');\r",
+							"pm.expect(target).to.have.property('fullName');\r",
+							"pm.expect(target).to.have.property('speciality');\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'fullName'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('fullName');\r",
+							"    pm.expect(jsonData.fullName, '\"fullName\" должен быть равен \"Иванов Иван Иванович\"').to.eql('Иванов Иван Иванович')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'speciality'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('speciality');\r",
+							"    pm.expect(jsonData.speciality, '\"speciality\" должен быть равен \"Терапевт\"').to.eql('Терапевт')\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/doctor/:docId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"doctor",
+						":docId"
+					],
+					"variable": [
+						{
+							"key": "docId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Добавление пациента c id=1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"const target = pm.response.json();\r",
+							"pm.test(\"Ответ должен содержать поля: id, uuid, fullName, birthday, email, phoneNumber\", function () {\r",
+							"pm.expect(target).to.have.property('id');\r",
+							"pm.expect(target).to.have.property('uuid');\r",
+							"pm.expect(target).to.have.property('fullName');\r",
+							"pm.expect(target).to.have.property('birthday');\r",
+							"pm.expect(target).to.have.property('email');\r",
+							"pm.expect(target).to.have.property('phoneNumber');\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'fullName'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('fullName');\r",
+							"    pm.expect(jsonData.fullName, '\"fullName\" должен быть равен \"Петров Петр Петрович\"').to.eql('Петров Петр Петрович')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'birthday'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('birthday');\r",
+							"    pm.expect(jsonData.birthday, '\"birthday\" должен быть равен \"1990-01-01\"').to.eql('1990-01-01')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'email'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('email');\r",
+							"    pm.expect(jsonData.email, '\"email\" должен быть равен \"ivanov@mail.ru\"').to.eql('ivanov@mail.ru')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'phoneNumber'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('phoneNumber');\r",
+							"    pm.expect(jsonData.phoneNumber, '\"email\" должен быть равен \"+78805453535\"').to.eql('+78805453535')\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fullName\": \"Петров Петр Петрович\",\r\n    \"birthday\": \"1990-01-01\",\r\n    \"email\": \"ivanov@mail.ru\",\r\n    \"phoneNumber\": \"+78805453535\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/patient/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"patient",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получение пациента по id=1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"const target = pm.response.json();\r",
+							"pm.test(\"Ответ должен содержать поля: id, uuid, fullName, birthday, email, phoneNumber\", function () {\r",
+							"pm.expect(target).to.have.property('id');\r",
+							"pm.expect(target).to.have.property('uuid');\r",
+							"pm.expect(target).to.have.property('fullName');\r",
+							"pm.expect(target).to.have.property('birthday');\r",
+							"pm.expect(target).to.have.property('email');\r",
+							"pm.expect(target).to.have.property('phoneNumber');\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'fullName'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('fullName');\r",
+							"    pm.expect(jsonData.fullName, '\"fullName\" должен быть равен \"Петров Петр Петрович\"').to.eql('Петров Петр Петрович')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'birthday'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('birthday');\r",
+							"    pm.expect(jsonData.birthday, '\"birthday\" должен быть равен \"1990-01-01\"').to.eql('1990-01-01')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'email'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('email');\r",
+							"    pm.expect(jsonData.email, '\"email\" должен быть равен \"ivanov@mail.ru\"').to.eql('ivanov@mail.ru')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'phoneNumber'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('phoneNumber');\r",
+							"    pm.expect(jsonData.phoneNumber, '\"email\" должен быть равен \"+78805453535\"').to.eql('+78805453535')\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/patient/:patientId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"patient",
+						":patientId"
+					],
+					"variable": [
+						{
+							"key": "patientId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Добавление пациента с id=2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"const target = pm.response.json();\r",
+							"pm.test(\"Ответ должен содержать поля: id, uuid, fullName, birthday, email, phoneNumber\", function () {\r",
+							"pm.expect(target).to.have.property('id');\r",
+							"pm.expect(target).to.have.property('uuid');\r",
+							"pm.expect(target).to.have.property('fullName');\r",
+							"pm.expect(target).to.have.property('birthday');\r",
+							"pm.expect(target).to.have.property('email');\r",
+							"pm.expect(target).to.have.property('phoneNumber');\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'fullName'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('fullName');\r",
+							"    pm.expect(jsonData.fullName, '\"fullName\" должен быть равен \"Сидоров Александр Александрович\"').to.eql('Сидоров Александр Александрович')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'birthday'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('birthday');\r",
+							"    pm.expect(jsonData.birthday, '\"birthday\" должен быть равен \"1980-02-12\"').to.eql('1980-02-12')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'email'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('email');\r",
+							"    pm.expect(jsonData.email, '\"email\" должен быть равен \"sidorov@mail.ru\"').to.eql('sidorov@mail.ru')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'phoneNumber'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('phoneNumber');\r",
+							"    pm.expect(jsonData.phoneNumber, '\"email\" должен быть равен \"+72405453524\"').to.eql('+72405453524')\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fullName\": \"Сидоров Александр Александрович\",\r\n    \"birthday\": \"1980-02-12\",\r\n    \"email\": \"sidorov@mail.ru\",\r\n    \"phoneNumber\": \"+72405453524\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/patient/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"patient",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получение пациента по id=2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"const target = pm.response.json();\r",
+							"pm.test(\"Ответ должен содержать поля: id, uuid, fullName, birthday, email, phoneNumber\", function () {\r",
+							"pm.expect(target).to.have.property('id');\r",
+							"pm.expect(target).to.have.property('uuid');\r",
+							"pm.expect(target).to.have.property('fullName');\r",
+							"pm.expect(target).to.have.property('birthday');\r",
+							"pm.expect(target).to.have.property('email');\r",
+							"pm.expect(target).to.have.property('phoneNumber');\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'fullName'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('fullName');\r",
+							"    pm.expect(jsonData.fullName, '\"fullName\" должен быть равен \"Сидоров Александр Александрович\"').to.eql('Сидоров Александр Александрович')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'birthday'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('birthday');\r",
+							"    pm.expect(jsonData.birthday, '\"birthday\" должен быть равен \"1980-02-12\"').to.eql('1980-02-12')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'email'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('email');\r",
+							"    pm.expect(jsonData.email, '\"email\" должен быть равен \"sidorov@mail.ru\"').to.eql('sidorov@mail.ru')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'phoneNumber'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('phoneNumber');\r",
+							"    pm.expect(jsonData.phoneNumber, '\"email\" должен быть равен \"+72405453524\"').to.eql('+72405453524')\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/patient/:patientId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"patient",
+						":patientId"
+					],
+					"variable": [
+						{
+							"key": "patientId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SOAP запрос на добавление расписания врачу с id=1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tic=\"http://ktelabs_test.ws/tickets\">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <tic:ticketsRequest>\r\n         <tic:doctorId>1</tic:doctorId>\r\n         <tic:startTime>2024-02-01T10:00:00</tic:startTime>\r\n         <tic:duration>30</tic:duration>\r\n         <tic:count>8</tic:count>\r\n      </tic:ticketsRequest>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/ws",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ws"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получение всех свободных записей к доктору с id=1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Статус должен быть 200\", function () {\r",
+							"    pm.response.to.be.ok;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Тест размера списка\", function () {\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length, 'Размер списка должен быть 8').to.eql(8);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tickets/doctor/:docId?date=2024-02-01",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tickets",
+						"doctor",
+						":docId"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2024-02-01"
+						}
+					],
+					"variable": [
+						{
+							"key": "docId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Запись пациента с id=1 к врачу в слот с id=1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"const target = pm.response.json();\r",
+							"pm.test(\"Ответ должен содержать поля: id, doctor, patient, date, startTime, available\", function () {\r",
+							"pm.expect(target).to.have.property('id');\r",
+							"pm.expect(target).to.have.property('doctor');\r",
+							"pm.expect(target).to.have.property('patient');\r",
+							"pm.expect(target).to.have.property('date');\r",
+							"pm.expect(target).to.have.property('startTime');\r",
+							"pm.expect(target).to.have.property('available');\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'id'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('id');\r",
+							"    pm.expect(jsonData.id, '\"id\" должен быть равен \"1\"').to.eql(1)\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'doctor.fullName'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('doctor');\r",
+							"    pm.expect(jsonData.doctor.fullName, '\"fullName\" должен быть равен \"Иванов Иван Иванович\"').to.eql('Иванов Иван Иванович')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'doctor.speciality'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('doctor');\r",
+							"    pm.expect(jsonData.doctor.speciality, '\"speciality\" должен быть равен \"Терапевт\"').to.eql('Терапевт')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'patient.id'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('patient');\r",
+							"    pm.expect(jsonData.patient.id, '\"id\" должен быть равен \"1\"').to.eql(1)\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'patient.fullName'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('patient');\r",
+							"    pm.expect(jsonData.patient.fullName, '\"fullName\" должен быть равен \"Петров Петр Петрович\"').to.eql('Петров Петр Петрович')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'date'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('date');\r",
+							"    pm.expect(jsonData.date, '\"date\" должна быть равна \"2024-02-01\"').to.eql('2024-02-01')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'startTime'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('startTime');\r",
+							"    pm.expect(jsonData.startTime, '\"startTime\" должен быть равен \"10:00\"').to.eql('10:00')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'available'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('available');\r",
+							"    pm.expect(jsonData.available, '\"available\" должна быть равна \"false\"').to.eql(false)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tickets/:ticketId/patient/:patientId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tickets",
+						":ticketId",
+						"patient",
+						":patientId"
+					],
+					"variable": [
+						{
+							"key": "ticketId",
+							"value": "1"
+						},
+						{
+							"key": "patientId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Запись пациента с id=2 к врачу на слот с id=2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"});\r",
+							"const target = pm.response.json();\r",
+							"pm.test(\"Ответ должен содержать поля: id, doctor, patient, date, startTime, available\", function () {\r",
+							"pm.expect(target).to.have.property('id');\r",
+							"pm.expect(target).to.have.property('doctor');\r",
+							"pm.expect(target).to.have.property('patient');\r",
+							"pm.expect(target).to.have.property('date');\r",
+							"pm.expect(target).to.have.property('startTime');\r",
+							"pm.expect(target).to.have.property('available');\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'id'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('id');\r",
+							"    pm.expect(jsonData.id, '\"id\" должен быть равен \"2\"').to.eql(2)\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'doctor.fullName'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('doctor');\r",
+							"    pm.expect(jsonData.doctor.fullName, '\"fullName\" должен быть равен \"Иванов Иван Иванович\"').to.eql('Иванов Иван Иванович')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'doctor.speciality'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('doctor');\r",
+							"    pm.expect(jsonData.doctor.speciality, '\"speciality\" должен быть равен \"Терапевт\"').to.eql('Терапевт')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'patient.id'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('patient');\r",
+							"    pm.expect(jsonData.patient.id, '\"id\" должен быть равен \"1\"').to.eql(2)\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'patient.fullName'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('patient');\r",
+							"    pm.expect(jsonData.patient.fullName, '\"fullName\" должен быть равен \"Сидоров Александр Александрович\"').to.eql('Сидоров Александр Александрович')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'date'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('date');\r",
+							"    pm.expect(jsonData.date, '\"date\" должна быть равна \"2024-02-01\"').to.eql('2024-02-01')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'startTime'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('startTime');\r",
+							"    pm.expect(jsonData.startTime, '\"startTime\" должен быть равен \"10:30\"').to.eql('10:30')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'available'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property('available');\r",
+							"    pm.expect(jsonData.available, '\"available\" должна быть равна \"false\"').to.eql(false)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tickets/:ticketId/patient/:patientId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tickets",
+						":ticketId",
+						"patient",
+						":patientId"
+					],
+					"variable": [
+						{
+							"key": "ticketId",
+							"value": "2"
+						},
+						{
+							"key": "patientId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получение всех свободных записей к доктору с id=1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Статус должен быть 200\", function () {\r",
+							"    pm.response.to.be.ok;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Тест размера списка\", function () {\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length, 'Размер списка должен быть 6').to.eql(6);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tickets/doctor/:docId?date=2024-02-01",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tickets",
+						"doctor",
+						":docId"
+					],
+					"query": [
+						{
+							"key": "date",
+							"value": "2024-02-01"
+						}
+					],
+					"variable": [
+						{
+							"key": "docId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получение всех записей пациента с id=1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Код статуса должен быть 200\", function () {\r",
+							"    pm.response.to.be.ok;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Размер списка должен быть 1\", function () {\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length, 'Размер списка должен быть 1').to.eql(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Проверка поля 'id[0]'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0]).to.have.property('id');\r",
+							"    pm.expect(jsonData[0].id, '\"id\" должен быть равен \"1\"').to.eql(1)\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'doctor.fullName'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0]).to.have.property('doctor');\r",
+							"    pm.expect(jsonData[0].doctor.fullName, '\"fullName\" должен быть равен \"Иванов Иван Иванович\"').to.eql('Иванов Иван Иванович')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'doctor.speciality'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0]).to.have.property('doctor');\r",
+							"    pm.expect(jsonData[0].doctor.speciality, '\"speciality\" должен быть равен \"Терапевт\"').to.eql('Терапевт')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'patient.id'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0]).to.have.property('patient');\r",
+							"    pm.expect(jsonData[0].patient.id, '\"id\" должен быть равен \"1\"').to.eql(1)\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'patient.fullName'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0]).to.have.property('patient');\r",
+							"    pm.expect(jsonData[0].patient.fullName, '\"fullName\" должен быть равен \"Петров Петр Петрович\"').to.eql('Петров Петр Петрович')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'date'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0]).to.have.property('date');\r",
+							"    pm.expect(jsonData[0].date, '\"date\" должна быть равна \"2024-02-01\"').to.eql('2024-02-01')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'startTime'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0]).to.have.property('startTime');\r",
+							"    pm.expect(jsonData[0].startTime, '\"startTime\" должен быть равен \"10:00\"').to.eql('10:00')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'available'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0]).to.have.property('available');\r",
+							"    pm.expect(jsonData[0].available, '\"available\" должна быть равна \"false\"').to.eql(false)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tickets/patient/:patientId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tickets",
+						"patient",
+						":patientId"
+					],
+					"variable": [
+						{
+							"key": "patientId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Получение всех записей пациента с id=2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Код статуса должен быть 200\", function () {\r",
+							"    pm.response.to.be.ok;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Размер списка должен быть 1\", function () {\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length, 'Размер списка должен быть 1').to.eql(1);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Проверка поля 'id[0]'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0]).to.have.property('id');\r",
+							"    pm.expect(jsonData[0].id, '\"id\" должен быть равен \"2\"').to.eql(2)\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'doctor.fullName'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0]).to.have.property('doctor');\r",
+							"    pm.expect(jsonData[0].doctor.fullName, '\"fullName\" должен быть равен \"Иванов Иван Иванович\"').to.eql('Иванов Иван Иванович')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'doctor.speciality'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0]).to.have.property('doctor');\r",
+							"    pm.expect(jsonData[0].doctor.speciality, '\"speciality\" должен быть равен \"Терапевт\"').to.eql('Терапевт')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'patient.id'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0]).to.have.property('patient');\r",
+							"    pm.expect(jsonData[0].patient.id, '\"id\" должен быть равен \"2\"').to.eql(2)\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'patient.fullName'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0]).to.have.property('patient');\r",
+							"    pm.expect(jsonData[0].patient.fullName, '\"fullName\" должен быть равен \"Сидоров Александр Александрович\"').to.eql('Сидоров Александр Александрович')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'date'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0]).to.have.property('date');\r",
+							"    pm.expect(jsonData[0].date, '\"date\" должна быть равна \"2024-02-01\"').to.eql('2024-02-01')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'startTime'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0]).to.have.property('startTime');\r",
+							"    pm.expect(jsonData[0].startTime, '\"startTime\" должен быть равен \"10:00\"').to.eql('10:30')\r",
+							"});\r",
+							"pm.test(\"Проверка поля 'available'\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData[0]).to.have.property('available');\r",
+							"    pm.expect(jsonData[0].available, '\"available\" должна быть равна \"false\"').to.eql(false)\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tickets/patient/:patientId",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tickets",
+						"patient",
+						":patientId"
+					],
+					"variable": [
+						{
+							"key": "patientId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
